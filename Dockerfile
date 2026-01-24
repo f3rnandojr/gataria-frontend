@@ -6,4 +6,4 @@ COPY package.json .
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD npm start:${REACT_APP_STAGE}
+CMD npm run start:${REACT_APP_STAGE}

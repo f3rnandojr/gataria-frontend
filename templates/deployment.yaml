@@ -44,6 +44,7 @@ spec:
             - name: http
               containerPort: {{ .Values.service.targetPort | default 80 }}
               protocol: TCP
+          
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

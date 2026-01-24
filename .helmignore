@@ -1,0 +1,18 @@
+# Arquivos grandes / indevidos
+cask.jws.json
+package-lock.json
+package.json
+
+# Frontend
+src
+public
+build
+dist
+
+# Git
+.git
+.github
+
+# Docs
+*.md
+Dockerfile
