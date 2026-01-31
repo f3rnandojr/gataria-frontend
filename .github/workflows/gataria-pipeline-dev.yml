@@ -8,30 +8,35 @@ on:
 jobs:
   build-dev:
     name: Build dev
-    if: contains(github.ref, 'dev')
-    runs-on: self-hosted  # ← APENAS self-hosted
+    if: contains (github.ref, 'dev')
+    runs-on: self-hosted
     steps:
     - name: Clone repository
       uses: actions/checkout@v3
-    - name: Step 2
-      run: ls
-    - name: run command
-      run: docker ps
-      
+    - name: Docker login
+      run: docker login -u ${{ vars.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASS }}
+    - name: Docker build
+      run: docker build -t fernandindtjr/gataria-frontend:dev$GITHUB_SHA . --build-arg REACT_APP_STAGE=dev
+    - name: docker push
+      run: docker push fernandindtjr/gataria-frontend:dev$GITHUB_SHA
   test-dev:
     name: Test dev
-    if: contains(github.ref, 'dev')
+    if: contains (github.ref, 'dev')
     runs-on: self-hosted
     needs: build-dev
     steps:
     - name: Step 1
       run: env
-      
   deploy-dev:
     name: Deploy dev
-    if: contains(github.ref, 'dev')
+    if: contains (github.ref, 'dev')
     runs-on: self-hosted
     needs: test-dev
+    # container: 
+    #   image: fernandindtjr/gataria-deploy:1.0
+    #   credentials: 
+    #     username:
+    #     password: 
     steps:
     - name: run command
       run: echo $GITHUB_SHA
