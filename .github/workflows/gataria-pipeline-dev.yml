@@ -32,7 +32,7 @@ jobs:
         node-version: '18'
     - name: Install dependencies
       run: npm ci
-    - name: Install dependencies
+    - name: Run test
       run: npm test
       
   deploy-dev:
@@ -46,9 +46,9 @@ jobs:
         username: ${{ vars.DOCKER_LOGIN }}
         password: ${{ secrets.DOCKER_PASS }}
     steps:
-    - name: Add ChartMusseum Repo
+    - name: Add ChartMuseum Repo
       run: helm repo add gataria-charts http://chartmuseum:8080   
     - name: helm update repo
       run: helm repo update
     - name: Deploy dev
-      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n dev --set image.tag=dev$GITHUB_SHA || helm install gataria-frontend gataria-charts/gataria-frontend -n dev --set image.tag=dev$GITHUB_SHA
+      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n dev --set "image.tag=dev$GITHUB_SHA" --set "ingress.hosts[0].hosts=dev.gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" || helm install gataria-frontend gataria-charts/gataria-frontend -n dev --set "image.tag=dev$GITHUB_SHA" --set "ingress.hosts[0].hosts=dev.gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix"
