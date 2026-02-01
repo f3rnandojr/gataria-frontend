@@ -40,11 +40,15 @@ jobs:
     if: contains (github.ref, 'dev')
     runs-on: self-hosted
     needs: test-dev
-    # container: 
-    #   image: fernandindtjr/gataria-deploy:1.0
-    #   credentials: 
-    #     username:
-    #     password: 
+    container: 
+      image: fernandindtjr/gataria-deploy:1.0
+      credentials: 
+        username: ${{ vars.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_PASS }}
     steps:
-    - name: run command
-      run: echo $GITHUB_SHA
+    - name: Add ChartMusseum Repo
+      run: helm repo add gataria-charts http://chartmuseum:32200   
+    - name: helm update repo
+      run: helm repo update
+    - name: Deploy dev
+      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n dev --set image.tag=dev$GITHUB_SHA || helm install gataria-frontend gataria-charts/gataria-frontend -n dev --set image.tag=dev$GITHUB_SHA
