@@ -51,8 +51,4 @@ jobs:
     - name: helm update repo
       run: helm repo update
     - name: Deploy prod
-<<<<<<< HEAD
-      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n prod --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" --set "autoscaling.enabled=true" || helm install gataria-frontend gataria-charts/gataria-frontend -n prod --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0].paths[0].pathType=Prefix" --set "autoscaling.enabled=true"
-=======
-      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n dev --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" --set "autoscaling.enabled=true" || helm install gataria-frontend gataria-charts/gataria-frontend -n dev --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" --set "autoscaling.enabled=true"
->>>>>>> cfe4e3ecb1a82ab84b4364d0c6af6697f74fc84f
+      run: helm upgrade gataria-frontend gataria-charts/gataria-frontend -n prod --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" --set "autoscaling.enabled=true" || helm install gataria-frontend gataria-charts/gataria-frontend -n prod --set "image.tag=prod$GITHUB_SHA" --set "ingress.hosts[0].hosts=gataria.example" --set "ingress.hosts[0].paths[0].path=/*" --set "ingress.hosts[0|.paths[0].pathType=Prefix" --set "autoscaling.enabled=true"
