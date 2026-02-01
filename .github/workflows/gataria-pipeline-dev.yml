@@ -47,7 +47,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
     steps:
     - name: Add ChartMusseum Repo
-      run: helm repo add gataria-charts http://chartmuseum:32200   
+      run: helm repo add gataria-charts http://chartmuseum:8080   
     - name: helm update repo
       run: helm repo update
     - name: Deploy dev
